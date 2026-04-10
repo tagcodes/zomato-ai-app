@@ -1,0 +1,195 @@
+:root {
+  --zomato-red: #E23744;
+  --bg-white: #FFFFFF;
+  --bg-gray: #F8F8F8;
+  --text-main: #1C1C1C;
+  --text-gray: #696969;
+  --border-light: #EEEEEE;
+  --ai-purple: #8B5CF6;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f2f5; /* Outer background */
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--bg-white);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(0,0,0,0.1);
+  transition: max-width 0.3s ease-in-out;
+}
+
+.view-mobile {
+  max-width: 450px;
+}
+
+.view-website {
+  max-width: 1200px;
+}
+
+.content-padding {
+  padding: 0 20px;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.zomato-btn {
+  background: var(--zomato-red);
+  color: white;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.1s ease;
+}
+
+.zomato-btn:active {
+  transform: scale(0.98);
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.budget-card {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.budget-card.active {
+  background: var(--zomato-red);
+  border-color: var(--zomato-red);
+  color: white;
+}
+
+.budget-card.active .label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.budget-card .icon {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.budget-card .label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.pill-ai {
+  background: var(--ai-purple);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-bar {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-gray);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  color: var(--zomato-red);
+}
+
+.section-title {
+  margin: 10px 20px 15px;
+  font-size: 18px;
+  font-weight: 800;
+}
+.results-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-website .results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.view-toggle {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: var(--zomato-red);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(226, 55, 68, 0.4);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  border: 4px solid white;
+}
+
+.view-website .view-toggle {
+  bottom: 30px;
+}

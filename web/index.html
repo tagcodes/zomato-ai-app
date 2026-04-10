@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Restaurant Recommender</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <h1>AI Restaurant Recommender</h1>
+          <p class="subtitle">Test the system end-to-end (Phase 1 → 2 → 3 → 4).</p>
+        </div>
+        <a class="api-link" href="/docs" target="_blank" rel="noreferrer">API Docs</a>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Preferences</h2>
+          <form id="prefsForm" class="form">
+            <label>
+              <span>City</span>
+              <select id="citySelect" name="city" required>
+                <option value="">Loading...</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Locality (optional)</span>
+              <select id="localitySelect" name="locality">
+                <option value="">(Any)</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Cuisine</span>
+              <input name="cuisine" placeholder="Italian" required />
+            </label>
+
+            <label>
+              <span>Budget max INR (for two)</span>
+              <input name="budget_max_inr" type="number" min="0" step="50" value="800" />
+            </label>
+
+            <label>
+              <span>Minimum rating</span>
+              <input name="min_rating" type="number" min="0" max="5" step="0.1" value="3.5" />
+            </label>
+
+            <label>
+              <span>Extras (optional)</span>
+              <input name="extras" placeholder="family-friendly, quick service" />
+            </label>
+
+            <div class="actions">
+              <button id="submitBtn" type="submit">Get recommendations</button>
+              <button id="sampleBtn" type="button" class="secondary">Use sample</button>
+            </div>
+            <p id="status" class="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="card results">
+          <div class="results-header">
+            <h2>Results</h2>
+            <div class="meta" id="meta"></div>
+          </div>
+          <p id="summary" class="summary"></p>
+          <div id="items" class="items"></div>
+          <div id="emptyState" class="empty">
+            Submit preferences to see ranked restaurants with AI explanations.
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Backend: <code>POST /api/v1/recommend</code></span>
+      </footer>
+    </div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
+
