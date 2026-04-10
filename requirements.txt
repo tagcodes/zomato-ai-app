@@ -6,3 +6,5 @@ groq
 fastapi
 uvicorn
 pytest
+streamlit
+pydantic
