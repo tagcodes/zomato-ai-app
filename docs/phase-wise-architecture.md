@@ -256,12 +256,34 @@ Contract tests for /recommend
 LLM
 Marked optional integration tests with recorded responses
 
-5.5 Deployment (optional)
-Containerize app + mount data/processed.
-Secrets via env; no keys in repo.
+5.5 Deployment
+The system is designed for a decoupled deployment strategy, separating the AI-powered backend from the high-fidelity user interface.
+
+- **Backend**: Deployed on **Streamlit** (Streamlit Cloud).
+- **Frontend**: Deployed on **Vercel**.
+
 5.6 Exit criteria
 Runbook: how to refresh data, bump prompt version, rotate API keys.
 Basic load/latency note for expected concurrency.
+
+Phase 6 — Deployment Details
+
+6.1 Backend Deployment (Streamlit)
+The backend service (FastAPI) will be deployed using **Streamlit Cloud**. This provides a managed Python environment that can host the recommendation logic and API endpoints.
+
+- **Source**: `src/phase4/app.py`
+- **Environment**: Streamlit Cloud (Python 3.11+)
+- **Secrets**: `GROQ_API_KEY` and other sensitive variables will be configured in the Streamlit secrets management dashboard.
+- **Data Persistence**: The processed restaurant catalog (`data/processed/restaurants.parquet`) will be bundled with the deployment.
+
+6.2 Frontend Deployment (Vercel)
+The high-fidelity mobile-first frontend (Next.js) will be deployed on **Vercel**. This ensures high performance and seamless integration with the Next.js framework.
+
+- **Source**: `frontend/` (Next.js 15)
+- **Environment**: Vercel Managed Infrastructure
+- **Base URL**: The frontend will interact with the backend API hosted on Streamlit Cloud via the `NEXT_PUBLIC_API_URL` environment variable.
+- **Continuous Integration**: Every push to the main branch will trigger an automatic build and deployment on Vercel.
+
 
 Dependency graph between phases
 Phase 1 (Catalog)
@@ -277,24 +299,23 @@ Phase 4 (API + UI)
     │
     ▼
 Phase 5 (Hardening)
+    │
+    ▼
+Phase 6 (Deployment)
+
 
 Phases 2–3 can be prototyped in a notebook before extraction into modules; Phase 4 should consume stable interfaces from 2 and 3.
 
 Technology stack (suggestion, not mandatory)
-Concern
-Suggested default
-Language
-Python 3.11+
-Data
-pandas or polars + Parquet
-Validation
-Pydantic v2
-API
-FastAPI
-LLM
-Groq via Groq API; key in .env → env (e.g. GROQ_API_KEY)
-UI
-Simple React/Vite or Streamlit for speed
+Concern | Suggested default
+--- | ---
+Language | Python 3.11+
+Data | pandas or polars + Parquet
+Validation | Pydantic v2
+API | FastAPI
+LLM | Groq via Groq API; key in .env → env (e.g. GROQ_API_KEY)
+Backend Host | Streamlit Cloud
+Frontend Host | Vercel (Next.js)
 
 Adjust to your course constraints; the phase boundaries stay the same.
 
